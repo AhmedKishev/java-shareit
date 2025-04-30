@@ -15,10 +15,10 @@ import java.util.Optional;
 @Repository
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class FakeUserRepository {
-    Map<Long, User> FAKE_USERS = new HashMap<>();
+    Map<Long, User> fakeUsers = new HashMap<>();
 
     private void findWithSameEmail(UserDto user) {
-        Optional<User> findUser = FAKE_USERS.values().stream().filter(user1 -> user.getEmail().equals(user1.getEmail())).findFirst();
+        Optional<User> findUser = fakeUsers.values().stream().filter(user1 -> user.getEmail().equals(user1.getEmail())).findFirst();
         if (findUser.isPresent()) {
             throw new SameEmailException("Такой email уже занят");
         }
@@ -28,24 +28,24 @@ public class FakeUserRepository {
         findWithSameEmail(user);
         User saveUser = UserMapper.toUser(user);
         saveUser.setId(getId());
-        FAKE_USERS.put(saveUser.getId(), saveUser);
+        fakeUsers.put(saveUser.getId(), saveUser);
         return saveUser;
     }
 
     private long getId() {
-        return FAKE_USERS.size() + 1;
+        return fakeUsers.size() + 1;
     }
 
     public Optional<User> getUserById(long id) {
-        return Optional.ofNullable(FAKE_USERS.get(id));
+        return Optional.ofNullable(fakeUsers.get(id));
     }
 
     public void remove(long id) {
-        FAKE_USERS.remove(id);
+        fakeUsers.remove(id);
     }
 
     public User edit(UserDto user, long id) {
-        User findUser = FAKE_USERS.get(id);
+        User findUser = fakeUsers.get(id);
         if (user.getEmail() != null) {
             findWithSameEmail(user);
         }
