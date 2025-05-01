@@ -36,7 +36,7 @@ public class FakeItemRepository {
     public Item save(Long userId, ItemDto item) {
         Optional<User> master = fakeUserRepository.getUserById(userId);
         if (master.isEmpty()) {
-            throw new ObjectNotFound("Такого пользователя не существует");
+            throw new ObjectNotFound("Пользователя с Id=" + userId + " не существует");
         }
         if (item.getDescription() == null) {
             throw new DescriptionException("Описание не может быть пустым");
@@ -63,7 +63,7 @@ public class FakeItemRepository {
     private void check(long userId, long itemId) {
         List<Long> itemByUser = getItemsByUser(userId);
         if (!itemByUser.contains(itemId)) {
-            throw new ObjectNotFound("У этого пользователя нету таких предметов");
+            throw new ObjectNotFound("У пользователя с Id=" + userId + " нету предметов с itemId=" + itemId);
         }
     }
 
@@ -83,7 +83,7 @@ public class FakeItemRepository {
     }
 
     public Item getItemById(long itemId) {
-        if (itemId > items.size()) throw new ObjectNotFound("Такого объекта нет");
+        if (itemId > items.size()) throw new ObjectNotFound("Предмета с Id=" + itemId + " не существует");
         return items.get(itemId);
     }
 

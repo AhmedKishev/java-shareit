@@ -20,7 +20,7 @@ public class FakeUserRepository {
     private void findWithSameEmail(UserDto user) {
         Optional<User> findUser = fakeUsers.values().stream().filter(user1 -> user.getEmail().equals(user1.getEmail())).findFirst();
         if (findUser.isPresent()) {
-            throw new SameEmailException("Такой email уже занят");
+            throw new SameEmailException("Такой email уже занят (" + user.getEmail() + ")");
         }
     }
 
