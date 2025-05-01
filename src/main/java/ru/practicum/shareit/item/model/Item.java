@@ -1,5 +1,6 @@
 package ru.practicum.shareit.item.model;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -17,9 +18,9 @@ public class Item {
     Long id;
     @NotNull
     User owner;
-    @NotNull
+    @NotBlank
     String name;
-    @NotNull
+    @NotBlank
     String description;
     boolean available;
 }
