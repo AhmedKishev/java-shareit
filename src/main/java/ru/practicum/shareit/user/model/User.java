@@ -1,26 +1,23 @@
-package ru.practicum.shareit.item.model;
+package ru.practicum.shareit.user.model;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
-import ru.practicum.shareit.user.model.User;
 
 /**
  * TODO Sprint add-controllers.
  */
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Builder
-public class Item {
+@AllArgsConstructor
+public class User {
     Long id;
-    @NotNull
-    User owner;
     @NotBlank
     String name;
+    @Email
     @NotBlank
-    String description;
-    boolean available;
+    String email;
 }
