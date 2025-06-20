@@ -18,35 +18,36 @@ import java.util.List;
 public class BookingController {
 
     BookingService bookingService;
+    String sharerUserId = "X-Sharer-User-Id";
 
     @PostMapping
-    public Booking addBooking(@RequestHeader("X-Sharer-User-Id") Long userId,
+    public Booking addBooking(@RequestHeader(sharerUserId) Long userId,
                               @RequestBody BookingDtoSave booking) {
         return bookingService.addBooking(booking, userId);
     }
 
     @PatchMapping("/{id}")
-    public Booking approveBooking(@RequestHeader("X-Sharer-User-Id") Long userId,
+    public Booking approveBooking(@RequestHeader(sharerUserId) Long userId,
                                   @PathVariable long id,
                                   @RequestParam boolean approved) {
         return bookingService.approveBooking(userId, id, approved);
     }
 
     @GetMapping("/{id}")
-    public Booking getBookingById(@RequestHeader("X-Sharer-User-Id") Long userId,
+    public Booking getBookingById(@RequestHeader(sharerUserId) Long userId,
                                   @PathVariable long id) {
         return bookingService.getBookingById(userId, id);
     }
 
     @GetMapping
-    public List<Booking> getAllBookingByBooker(@RequestHeader("X-Sharer-User-Id") Long userId,
+    public List<Booking> getAllBookingByBooker(@RequestHeader(sharerUserId) Long userId,
                                                @RequestParam(name = "state", defaultValue = "ALL") String state) {
         return bookingService.getAllBookingByBooker(userId, state);
     }
 
 
     @GetMapping("/owner")
-    public List<Booking> getAllBookingByOwner(@RequestHeader("X-Sharer-User-Id") Long userId,
+    public List<Booking> getAllBookingByOwner(@RequestHeader(sharerUserId) Long userId,
                                               @RequestParam(name = "state", defaultValue = "ALL") String state) {
 
         return bookingService.getAllBookingByOwner(userId, state);

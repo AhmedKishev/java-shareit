@@ -23,9 +23,10 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ItemController {
     ItemService itemService;
+    String sharerUserId = "X-Sharer-User-Id";
 
     @PostMapping
-    public Item addItem(@RequestHeader("X-Sharer-User-Id") Long userId,
+    public Item addItem(@RequestHeader(sharerUserId) Long userId,
                         @Valid @RequestBody ItemDto item) {
         return itemService.save(userId, item);
     }
@@ -33,7 +34,7 @@ public class ItemController {
     @PatchMapping("/{itemId}")
     public Item editItem(@PathVariable("itemId") long itemId,
                          @Valid @RequestBody ItemDto editItem,
-                         @RequestHeader("X-Sharer-User-Id") Long userId) {
+                         @RequestHeader(sharerUserId) Long userId) {
         Item item = itemService.edit(itemId, editItem, userId);
         return item;
     }
@@ -44,7 +45,7 @@ public class ItemController {
     }
 
     @GetMapping
-    public List<Item> getItemsByUser(@RequestHeader("X-Sharer-User-Id") long userId) {
+    public List<Item> getItemsByUser(@RequestHeader(sharerUserId) long userId) {
         return itemService.getItemsByUser(userId);
     }
 
@@ -54,7 +55,7 @@ public class ItemController {
     }
 
     @PostMapping("/{itemId}/comment")
-    public CommentDtoOut addComment(@RequestHeader("X-Sharer-User-Id") long userId,
+    public CommentDtoOut addComment(@RequestHeader(sharerUserId) long userId,
                                     @RequestBody CommentDto commentDto,
                                     @PathVariable("itemId") long itemId) {
         return itemService.addComment(commentDto, userId, itemId);

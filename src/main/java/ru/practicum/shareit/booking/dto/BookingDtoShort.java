@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class BookingDtoShort {
-    private long id;
-    private LocalDateTime start;
-    private LocalDateTime end;
-    private Status status;
-    private long bookerId;
+    long id;
+    LocalDateTime start;
+    LocalDateTime end;
+    Status status;
+    long bookerId;
 }

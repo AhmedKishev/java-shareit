@@ -42,7 +42,7 @@ public class BookingServiceImpl implements BookingService {
         Item findItem = itemRepository.findById(booking.getItemId()).get();
         User findUser = userRepository.findById(userId).get();
         if (!findItem.isAvailable()) {
-            throw new FailBooking("Вещь недоступна для брони");
+            throw new FailBooking("Вещь c id: " + findItem.getId() + " недоступна для брони");
         }
         return bookingRepository.save(BookingMapper.toBooking(booking, findItem, findUser));
     }
