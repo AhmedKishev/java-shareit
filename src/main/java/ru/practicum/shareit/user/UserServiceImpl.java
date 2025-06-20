@@ -37,14 +37,14 @@ public class UserServiceImpl implements UserService {
     public User edit(Long userId, UserDto userEdit) {
         User user = UserMapper.toUser(userEdit);
         User findUser = getUserById(userId);
-        UpdateUser(findUser, userEdit);
+        updateUser(findUser, userEdit);
         user.setId(userId);
         userRepository.save(findUser);
         log.info(user.toString());
         return user;
     }
 
-    private void UpdateUser(User updateUser, UserDto user) {
+    private void updateUser(User updateUser, UserDto user) {
         if (user.getEmail() != null) {
             updateUser.setEmail(user.getEmail());
         }
