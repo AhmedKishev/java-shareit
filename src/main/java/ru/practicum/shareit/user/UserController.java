@@ -16,11 +16,11 @@ import ru.practicum.shareit.user.model.User;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserController {
-    UserService userService;
     static final String pathThrowId = "/{id}";
+    UserService userService;
 
     @PostMapping
-    public User addUser(@Valid @RequestBody UserDto user) {
+    public User addUser(@Valid @RequestBody User user) {
         return userService.save(user);
     }
 

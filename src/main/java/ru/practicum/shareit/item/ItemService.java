@@ -1,38 +1,26 @@
 package ru.practicum.shareit.item;
 
-import jakarta.validation.Valid;
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
-import org.springframework.stereotype.Repository;
+import ru.practicum.shareit.item.comment.dto.CommentDto;
+import ru.practicum.shareit.item.comment.dto.CommentDtoOut;
 import ru.practicum.shareit.item.dto.ItemDto;
+import ru.practicum.shareit.item.dto.ItemDtoOut;
 import ru.practicum.shareit.item.model.Item;
 
 import java.util.List;
 
-@Repository
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@RequiredArgsConstructor
-public class ItemService {
-    FakeItemRepository itemRepository;
+public interface ItemService {
+    Item save(Long userId, ItemDto item);
 
-    public Item save(Long userId, @Valid ItemDto item) {
-        return itemRepository.save(userId, item);
-    }
+    Item edit(long itemId, ItemDto editItem, Long userId);
 
-    public Item edit(long itemId, ItemDto editItem, Long userId) {
-        return itemRepository.edit(itemId, editItem, userId);
-    }
+    ItemDtoOut getItemById(long itemId);
 
-    public Item getItemById(long itemId) {
-        return itemRepository.getItemById(itemId);
-    }
+    List<Item> getItemsByUser(long userId);
 
-    public List<Item> getItemsByUser(long userId) {
-        return itemRepository.getItemsByUserId(userId);
-    }
+    List<Item> getItemsByText(String text);
 
-    public List<Item> getItemsByText(String text) {
-        return itemRepository.getItemsByText(text);
-    }
+    CommentDtoOut addComment(CommentDto commentDto, long userId, long itemId);
+
+    List<CommentDtoOut> getAllCommentByItemId(long userId, long itemId);
+
 }

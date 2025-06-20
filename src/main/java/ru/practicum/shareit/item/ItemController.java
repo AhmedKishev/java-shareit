@@ -6,7 +6,10 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.shareit.item.comment.dto.CommentDto;
+import ru.practicum.shareit.item.comment.dto.CommentDtoOut;
 import ru.practicum.shareit.item.dto.ItemDto;
+import ru.practicum.shareit.item.dto.ItemDtoOut;
 import ru.practicum.shareit.item.model.Item;
 
 import java.util.List;
@@ -31,11 +34,12 @@ public class ItemController {
     public Item editItem(@PathVariable("itemId") long itemId,
                          @Valid @RequestBody ItemDto editItem,
                          @RequestHeader("X-Sharer-User-Id") Long userId) {
-        return itemService.edit(itemId, editItem, userId);
+        Item item = itemService.edit(itemId, editItem, userId);
+        return item;
     }
 
     @GetMapping("/{itemId}")
-    public Item getItemById(@PathVariable("itemId") long itemId) {
+    public ItemDtoOut getItemById(@PathVariable("itemId") long itemId) {
         return itemService.getItemById(itemId);
     }
 
@@ -49,5 +53,11 @@ public class ItemController {
         return itemService.getItemsByText(text);
     }
 
+    @PostMapping("/{itemId}/comment")
+    public CommentDtoOut addComment(@RequestHeader("X-Sharer-User-Id") long userId,
+                                    @RequestBody CommentDto commentDto,
+                                    @PathVariable("itemId") long itemId) {
+        return itemService.addComment(commentDto, userId, itemId);
+    }
 
 }

@@ -14,6 +14,7 @@ public class Handler {
         return new ErrorResponse(e.getMessage());
     }
 
+
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler
     public ErrorResponse nameException(final NameException e) {
@@ -29,6 +30,13 @@ public class Handler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler
     public ErrorResponse exceptionDescription(final DescriptionException e) {
+        return new ErrorResponse(e.getMessage());
+    }
+
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler
+    public ErrorResponse failForBooking(final FailBooking e) {
         return new ErrorResponse(e.getMessage());
     }
 }
