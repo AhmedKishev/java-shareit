@@ -23,7 +23,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ItemController {
     ItemService itemService;
-    String sharerUserId = "X-Sharer-User-Id";
+    final String sharerUserId = "X-Sharer-User-Id";
 
     @PostMapping
     public Item addItem(@RequestHeader(sharerUserId) Long userId,

@@ -18,7 +18,7 @@ import java.util.List;
 public class BookingController {
 
     BookingService bookingService;
-    String sharerUserId = "X-Sharer-User-Id";
+    final String sharerUserId = "X-Sharer-User-Id";
 
     @PostMapping
     public Booking addBooking(@RequestHeader(sharerUserId) Long userId,
