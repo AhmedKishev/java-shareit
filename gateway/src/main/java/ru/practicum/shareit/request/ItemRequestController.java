@@ -27,13 +27,13 @@ public class ItemRequestController {
     }
 
     @Validated
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Object> createItemRequest(@RequestHeader(value = HEADER_SHARER_USER_ID) Long userId,
                                                     @RequestBody @Valid ItemRequestDto itemRequestDto) {
         return itemRequestClient.createItemRequest(itemRequestDto, userId);
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<Object> getItemRequests(@RequestHeader(value = HEADER_SHARER_USER_ID) Long userId) {
         return itemRequestClient.getItemRequests(userId);
     }

@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import ru.practicum.shareit.user.dto.UserUpdateDto;
 
 
-
 @Slf4j
 @Validated
 @RestController
@@ -22,7 +21,7 @@ public class UserController {
     private final UserClient userClient;
 
     @Validated
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Object> createUser(@RequestBody @Valid UserDto userDto) {
         return userClient.createUser(userDto);
     }
@@ -44,7 +43,7 @@ public class UserController {
         userClient.deleteUser(userId);
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<Object> getAllUsers() {
         return userClient.getUsers();
     }

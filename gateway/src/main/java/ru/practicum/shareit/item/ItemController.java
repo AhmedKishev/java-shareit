@@ -14,8 +14,6 @@ import ru.practicum.shareit.item.dto.ItemDto;
 import lombok.AllArgsConstructor;
 
 
-
-
 @Validated
 @RestController
 @AllArgsConstructor
@@ -32,7 +30,7 @@ public class ItemController {
         return itemClient.searchItems(text, userId, from, size);
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<Object> getAllItems(@PositiveOrZero @RequestParam(name = "from", defaultValue = "0") Integer from,
                                               @RequestHeader(required = false, value = HEADER_SHARER_USER_ID) Long userId,
                                               @Positive @RequestParam(name = "size", defaultValue = "10") Integer size) {
@@ -46,7 +44,7 @@ public class ItemController {
         return itemClient.updateItem(itemDto, itemId, userId);
     }
 
-    @PostMapping()
+    @PostMapping
     @Validated
     public ResponseEntity<Object> createItem(@RequestHeader(required = false, value = HEADER_SHARER_USER_ID) Long userId,
                                              @RequestBody @Valid ItemDto itemDto) {
